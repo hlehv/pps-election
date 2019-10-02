@@ -35,8 +35,8 @@ public class EdgeMapGenerator implements election.sim.MapGenerator {
         threshold1.lineTo(500., (500-THRESHOLDBORDER) * Math.sqrt(3));
         
         //how many voters we want within the initial threshold convert to int
-        int t1 = (int) (THRESHOLDPERCENT * numVoters);
-        System.out.println(threshold1number);
+        int threshold1number = (int) (THRESHOLDPERCENT * numVoters);
+        //System.out.println(threshold1number);
         for (int i = 0; i < threshold1number; ++ i) {
             double x, y;
             do {
@@ -47,19 +47,19 @@ public class EdgeMapGenerator implements election.sim.MapGenerator {
             /*for (int j = 0; j < numParties; ++ j)
                 pref.add(random.nextDouble());*/
             if(x <= 500 && y > 50) {
-                pref.add(.9);
-                pref.add(0);
-                pref.add(0);
+                pref.add(random.nextDouble()*.8);
+                pref.add(random.nextDouble()*.4);
+                pref.add(random.nextDouble()*.4);
             }
             else if(x > 500 && y > 50) {
-                pref.add(0);
-                pref.add(.9);
-                pref.add(0);
+                pref.add(random.nextDouble()*.4);
+                pref.add(random.nextDouble()*.8);
+                pref.add(random.nextDouble()*.4);
             }
             else if(y <= 50) {
-                pref.add(0);
-                pref.add(0);
-                pref.add(.9);
+                pref.add(random.nextDouble()*.4);
+                pref.add(random.nextDouble()*.4);
+                pref.add(random.nextDouble()*.8);
             }
 
             ret.add(new Voter(new Point2D.Double(x, y), pref));
@@ -72,23 +72,8 @@ public class EdgeMapGenerator implements election.sim.MapGenerator {
                 y = random.nextDouble() * 900.0;
             } while (!threshold1.contains(x, y));
             List<Double> pref = new ArrayList<Double>();
-            /*for (int j = 0; j < numParties; ++ j)
-                pref.add(random.nextDouble());*/
-            if(x <= 500 && y > 50) {
-                pref.add(.9);
-                pref.add(0);
-                pref.add(0);
-            }
-            else if(x > 500 && y > 50) {
-                pref.add(0);
-                pref.add(.9);
-                pref.add(0);
-            }
-            else if(y <= 50) {
-                pref.add(0);
-                pref.add(0);
-                pref.add(.9);
-            }
+            for (int j = 0; j < numParties; ++ j)
+                pref.add(random.nextDouble());
 
             ret.add(new Voter(new Point2D.Double(x, y), pref));
         }
